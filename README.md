@@ -9,6 +9,6 @@ You can open the options panel in two ways:
 2.	Through the minimap buttons that Blizzard gave us. It’s a tiny number at the top-left or bottom-left of the minimap, click it and you will find it
 
 Right now, MOV adds:
-•	Timer on the mirror bar, which is movable.
-•	The name of the bar became movable.
-•	You can create, load, and delete a profile so you can copy/paste your settings between your characters!
+- Timer on the mirror bar, which is movable.
+- The name of the bar became movable.
+- You can create, load, and delete a profile so you can copy/paste your settings between your characters!
