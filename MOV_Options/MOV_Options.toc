@@ -1,0 +1,27 @@
+## Interface: 110200
+## Category: Buffs & Debuffs
+## Category-deDE: Buffs & Debuffs
+## Category-esES: Beneficios y Perjuicios
+## Category-esMX: Beneficios y Perjuicios
+## Category-frFR: Améliorations et Affaiblissements
+## Category-itIT: Benefici e penalità
+## Category-koKR: 강화 및 약화 효과
+## Category-ptBR: Bônus e Penalidades
+## Category-ruRU: Баффы и дебаффы
+## Category-zhCN: 增益和减益
+## Category-zhTW: 增益與減益
+## Title: Mirrors |cffc04000of|r Voodoo |cffc04000Options|r
+## Notes: |cffF0E68COptions for the |cffc04000Mirrors|r of |cffc04000Voodoo|r!
+## IconAtlas: Relic-Fire-TraitBG
+## DefaultState: enabled
+## LoadOnDemand: 1
+## Dependencies: MOV
+## AllowAddOnTableAccess: 1
+## Version: 1.00
+## Author: The_Indolent
+## X-Website: https://panosanastasiou.rocks/
+
+MOV_Virtuals.xml
+MOV_Options_0.xml
+MOV_Options_1.xml
+MOV_Options_2.xml
