@@ -1,4 +1,4 @@
-## Interface: 110200
+## Interface: 110207
 ## Category: Buffs & Debuffs
 ## Category-deDE: Buffs & Debuffs
 ## Category-esES: Beneficios y Perjuicios
@@ -17,7 +17,7 @@
 ## LoadOnDemand: 1
 ## Dependencies: MOV
 ## AllowAddOnTableAccess: 1
-## Version: 1.00
+## Version: 1.01
 ## Author: The_Indolent
 ## X-Website: https://panosanastasiou.rocks/
 
@@ -25,3 +25,4 @@ MOV_Virtuals.xml
 MOV_Options_0.xml
 MOV_Options_1.xml
 MOV_Options_2.xml
+
