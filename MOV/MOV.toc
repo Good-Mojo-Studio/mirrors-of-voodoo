@@ -1,4 +1,4 @@
-## Interface: 110200
+## Interface: 110207
 ## Category: Buffs & Debuffs
 ## Category-deDE: Buffs & Debuffs
 ## Category-esES: Beneficios y Perjuicios
@@ -13,14 +13,13 @@
 ## Title: Mirrors of |cffc04000Voodoo|r
 ## Notes: |cffF0E68CMake some |cffc04000Voodoo|r to the default mirrors bars|r!|n(|cffc04000Breath|r, |cffc04000Exaust|r, |cffc04000etc|r)
 ## IconAtlas: Relic-Fire-TraitBG
-
 ## DefaultState: enabled
-## AllowAddOnTableAccess: 1
 ## SavedVariables: MOVnumber MOVprofile MOVcounterLoading MOVcounterDeleting
 ## SavedVariablesPerCharacter: MOVplayer
-## Version: 1.00
+## Version: 1.01
 ## Author: The_Indolent
 ## X-Website: https://panosanastasiou.rocks/
 
 MOV_Zlave.xml
 MOV_Zlave.lua
+
