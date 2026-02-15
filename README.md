@@ -10,7 +10,7 @@ Enchant the default Breath, Fatigue, and other mirror bars with a touch of good 
 
 ### Addon support, information, ideas
 
-Here is some more information for the addon: [https://github.com/Good-Mojo-Studio/voodoo-casting-bar/wiki/Voodoo-Casting-Bar](https://github.com/Good-Mojo-Studio/voodoo-casting-bar/wiki/Voodoo-Casting-Bar)
+Here is some more information for the addon: https://github.com/Good-Mojo-Studio/mirrors-of-voodoo/wiki
 
 ---
 
