@@ -1,4 +1,8 @@
-## Interface: 110207
+## Interface: 120001
+## IconAtlas: Relic-Fire-TraitBG
+## Title: Mirrors |cFFBCA220of|r Voodoo
+## Notes: |cFFD1D9BFGive a little |cFFBCA220mojo|r to the default |cFFBCA220mirrors|r bars|n(|cFFBCA220Breath|r, Exhaust, |cFFBCA220etc|r)|r
+## Version: 1.01.01
 ## Category: Buffs & Debuffs
 ## Category-deDE: Buffs & Debuffs
 ## Category-esES: Beneficios y Perjuicios
@@ -10,16 +14,12 @@
 ## Category-ruRU: Баффы и дебаффы
 ## Category-zhCN: 增益和减益
 ## Category-zhTW: 增益與減益
-## Title: Mirrors of |cffc04000Voodoo|r
-## Notes: |cffF0E68CMake some |cffc04000Voodoo|r to the default mirrors bars|r!|n(|cffc04000Breath|r, |cffc04000Exaust|r, |cffc04000etc|r)
-## IconAtlas: Relic-Fire-TraitBG
+## Group: VDWS
+## Dependencies: VDW
 ## DefaultState: enabled
-## SavedVariables: MOVnumber MOVprofile MOVcounterLoading MOVcounterDeleting
-## SavedVariablesPerCharacter: MOVplayer
-## Version: 1.01
+## SavedVariables: MOVprofiles
+## SavedVariablesPerCharacter: MOVsettings, MOVspecialSettings
 ## Author: The_Indolent
 ## X-Website: https://panosanastasiou.rocks/
 
 MOV_Zlave.xml
-MOV_Zlave.lua
-

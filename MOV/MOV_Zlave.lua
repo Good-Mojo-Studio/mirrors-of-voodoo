@@ -1,16 +1,20 @@
--- create some global variables --
+-- some variables --
+VDW.MOV = VDW.MOV or {}
+local G = VDW.Local.Override
+local C = VDW.GetAddonColors("MOV")
+local prefixTip = VDW.Prefix("MOV")
+local prefixChat = VDW.PrefixChat("MOV")
 local function CreateGlobalVariables()
--- Colors --
-	movMainColor = CreateColorFromRGBAHexString("F0E68CFF")
-	movHighColor = CreateColorFromRGBAHexString("C04000FF")
-	movNoMainColor = CreateColorFromRGBAHexString("F0E68C00")
-	movNoHighColor = CreateColorFromRGBAHexString("C0400000")
--- function for showing the menu --
-	local function movShowMenu()
+-- function for opening the options --
+	local function ShowMenu()
 		if not InCombatLockdown() then
 			local _, loaded = C_AddOns.IsAddOnLoaded("MOV_Options")
 			local loadable, reason = C_AddOns.IsAddOnLoadable("MOV_Options" , nil , true)
-			if loadable and not loaded then
+			if reason == "MISSING" then
+				C_Sound.PlayVocalErrorSound(48)
+				DEFAULT_CHAT_FRAME:AddMessage(C.Main:WrapTextInColorCode(prefixChat.." "..string.format(G.WRN_ADDON_IS_STATE, C.High:WrapTextInColorCode("Mirrors of Voodoo Options"), reason)))
+				UIErrorsFrame:AddExternalWarningMessage(string.format(G.WRN_ADDON_IS_STATE, C.High:WrapTextInColorCode("Mirrors of Voodoo Options"), reason))
+			elseif loadable and not loaded then
 				C_AddOns.LoadAddOn("MOV_Options")
 				if not movOptions00:IsShown() then
 					movOptions00:Show()
@@ -24,47 +28,68 @@ local function CreateGlobalVariables()
 					movOptions00:Hide()
 				end
 			else
-				local movTime = GameTime_GetTime(false)
-				DEFAULT_CHAT_FRAME:AddMessage(movTime.." |A:"..C_AddOns.GetAddOnMetadata("MOV", "IconAtlas")..":16:16|a ["..movMainColor:WrapTextInColorCode(C_AddOns.GetAddOnMetadata("MOV", "Title")).."] The addon with the name "..movMainColor:WrapTextInColorCode(C_AddOns.GetAddOnMetadata("MOV_Options", "Title")).." is "..reason.."!")
+				C_Sound.PlayVocalErrorSound(48)
+				DEFAULT_CHAT_FRAME:AddMessage(C.Main:WrapTextInColorCode(prefixChat.." "..string.format(G.WRN_ADDON_IS_STATE, C_AddOns.GetAddOnMetadata("MOV_Options", "Title"), reason)))
+				UIErrorsFrame:AddExternalWarningMessage(string.format(G.WRN_ADDON_IS_STATE, C_AddOns.GetAddOnMetadata("MOV_Options", "Title"), reason))
 			end
 		else
-			local movTime = GameTime_GetTime(false)
-			DEFAULT_CHAT_FRAME:AddMessage(movTime.." |A:"..C_AddOns.GetAddOnMetadata("MOV", "IconAtlas")..":16:16|a ["..movMainColor:WrapTextInColorCode(C_AddOns.GetAddOnMetadata("MOV", "Title")).."] While you are in combat, you can't do this!")
+			C_Sound.PlayVocalErrorSound(48)
+			DEFAULT_CHAT_FRAME:AddMessage(C.Main:WrapTextInColorCode(prefixChat.." "..G.WRN_COMBAT_LOCKDOWN))
+			UIErrorsFrame:AddExternalWarningMessage(G.WRN_COMBAT_LOCKDOWN)
 		end
 	end
--- Slash Command --
-	RegisterNewSlashCommand(movShowMenu, "mov", "mirrorsofvoodoo")
--- Mini Map Button Functions --
+-- slash command --
+	RegisterNewSlashCommand(ShowMenu, "mov", "mirrorsofvoodoo2")
+-- mini map Button Functions --
 	AddonCompartmentFrame:RegisterAddon({
-		text = movMainColor:WrapTextInColorCode(C_AddOns.GetAddOnMetadata("MOV", "Title")),
+		text = C.Main:WrapTextInColorCode(C_AddOns.GetAddOnMetadata("MOV", "Title")),
 		icon = C_AddOns.GetAddOnMetadata("MOV", "IconAtlas"),
 		notCheckable = true,
 		func = function(button, menuInputData, menu)
 			local buttonName = menuInputData.buttonName
 			if buttonName == "LeftButton" then
-				movShowMenu()
+				ShowMenu()
 			end
 		end,
 		funcOnEnter = function(button)
 			MenuUtil.ShowTooltip(button, function(tooltip)
-			tooltip:SetText("|A:"..C_AddOns.GetAddOnMetadata("MOV", "IconAtlas")..":16:16|a "..movMainColor:WrapTextInColorCode(C_AddOns.GetAddOnMetadata("MOV", "Title")).."|nLeft Click: "..movMainColor:WrapTextInColorCode("Open the main panel of settings!"))
+			tooltip:SetOwner(AddonCompartmentFrame, "ANCHOR_TOP", 0, 0)
+			tooltip:SetText(C.Main:WrapTextInColorCode(prefixTip).."|n"..G.BUTTON_L_CLICK..": "..G.TIP_OPEN_SETTINGS_MAIN)
 			end)
 		end,
 		funcOnLeave = function(button)
-			MenuUtil.HideTooltip(button)
+			MenuUtil.HideTooltip(AddonCompartmentFrame)
 		end,
 	})
 end
--- First time saved variable function --
+-- loading first time the variables --
 local function FirstTimeSavedVariables()
-	if MOVcounterLoading == nil or MOVcounterLoading ~= nil then MOVcounterLoading = 0 end
-	if MOVcounterDeleting == nil or MOVcounterDeleting ~= nil then MOVcounterDeleting = 0 end
-	if MOVprofile == nil then MOVprofile = {} end
-	if MOVnumber == nil then MOVnumber = 0 end
-	if MOVplayer == nil then
-		MOVplayer = {NameText = {Position = "Bottom Left"},
-			TimeText = {Position = "Bottom Right"},
+	if MOVprofiles == nil then MOVprofiles = {} end
+	if MOVsettings == nil then
+		MOVsettings = {
+			NameText = {Position = G.OPTIONS_P_BOTTOMLEFT},
+			TimeText = {Position = G.OPTIONS_P_BOTTOMRIGHT},
 		}
+	end
+	if MOVspecialSettings == nil then MOVspecialSettings = {} end
+	if MOVspecialSettings["LastLocation"] == nil then
+		MOVspecialSettings["LastLocation"] = GetLocale()
+	end
+end
+-- protect the options --
+local function ProtectOptions()
+	local loc = GetLocale()
+	if loc ~= MOVspecialSettings["LastLocation"] then
+		for k, v in pairs(VDW.Local.Translate) do
+			for i, s in pairs (v) do
+				if MOVsettings["NameText"]["Position"] == s then
+					MOVsettings["NameText"]["Position"] = VDW.Local.Translate[loc][i]
+				end
+				if MOVsettings["TimeText"]["Position"] == s then
+					MOVsettings["TimeText"]["Position"] = VDW.Local.Translate[loc][i]
+				end
+			end
+		end
 	end
 end
 -- Time Text for MirrorTimerContainer.mirrorTimers[1] --
@@ -97,43 +122,43 @@ local function CalculateShowTime(var1, txt)
 end
 -- Postion function for the timers --
 local function Positioning(self , var1, var2)
-	if MOVplayer[var1]["Position"] == "Top Left" then
+	if MOVsettings[var1]["Position"] == G.OPTIONS_P_TOPLEFT then
 		var2:ClearAllPoints()
 		var2:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 8, 0)
 		if not var2:IsShown() then var2:Show() end
-	elseif MOVplayer[var1]["Position"] == "Left" then
+	elseif MOVsettings[var1]["Position"] == G.OPTIONS_P_LEFT then
 		var2:ClearAllPoints()
 		var2:SetPoint("LEFT", self, "LEFT", 8, 6)
 		if not var2:IsShown() then var2:Show() end
-	elseif MOVplayer[var1]["Position"] == "Bottom Left" then
+	elseif MOVsettings[var1]["Position"] == G.OPTIONS_P_BOTTOMLEFT then
 		var2:ClearAllPoints()
 		var2:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 8, 15)
 		if not var2:IsShown() then var2:Show() end
-	elseif MOVplayer[var1]["Position"] == "Top" then
+	elseif MOVsettings[var1]["Position"] == G.OPTIONS_P_TOP then
 		var2:ClearAllPoints()
 		var2:SetPoint("BOTTOM", self, "TOP", 0, 0)
 		if not var2:IsShown() then var2:Show() end
-	elseif MOVplayer[var1]["Position"] == "Center" then
+	elseif MOVsettings[var1]["Position"] == G.OPTIONS_P_CENTER then
 		var2:ClearAllPoints()
 		var2:SetPoint("CENTER", self, "CENTER", 0, 6)
 		if not var2:IsShown() then var2:Show() end
-	elseif MOVplayer[var1]["Position"] == "Bottom" then
+	elseif MOVsettings[var1]["Position"] == G.OPTIONS_P_BOTTOM then
 		var2:ClearAllPoints()
 		var2:SetPoint("TOP", self, "BOTTOM", 0, 15)
 		if not var2:IsShown() then var2:Show() end
-	elseif MOVplayer[var1]["Position"] == "Top Right" then
+	elseif MOVsettings[var1]["Position"] == G.OPTIONS_P_TOPRIGHT then
 		var2:ClearAllPoints()
 		var2:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", -8, 0)
 		if not var2:IsShown() then var2:Show() end
-	elseif MOVplayer[var1]["Position"] == "Right" then
+	elseif MOVsettings[var1]["Position"] == G.OPTIONS_P_RIGHT then
 		var2:ClearAllPoints()
 		var2:SetPoint("RIGHT", self, "RIGHT", -8, 6)
 		if not var2:IsShown() then var2:Show() end
-	elseif MOVplayer[var1]["Position"] == "Bottom Right" then
+	elseif MOVsettings[var1]["Position"] == G.OPTIONS_P_BOTTOMRIGHT then
 		var2:ClearAllPoints()
 		var2:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", -8, 15)
 		if not var2:IsShown() then var2:Show() end
-	elseif MOVplayer[var1]["Position"] == "Hide" then
+	elseif MOVsettings[var1]["Position"] == G.OPTIONS_V_HIDE then
 		var2:Hide()
 	end
 end
@@ -171,6 +196,8 @@ local function EventsTime(self, event, arg1, arg2, arg3)
 	if event == "PLAYER_LOGIN" then
 		CreateGlobalVariables()
 		FirstTimeSavedVariables()
+		ProtectOptions()
+		MOVspecialSettings["LastLocation"] = GetLocale()
 	end
 end
 movZlave:SetScript("OnEvent", EventsTime)

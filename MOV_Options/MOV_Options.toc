@@ -1,4 +1,8 @@
-## Interface: 110207
+## Interface: 120001
+## IconAtlas: Relic-Fire-TraitBG
+## Title: Mirrors |cFFBCA220of|r Voodoo |cFFBCA220Options|r
+## Notes: |cFFD1D9BFOptions for the |cFFBCA220Mirrors|r of |cFFBCA220Voodoo|r!|r
+## Version: 1.01.01
 ## Category: Buffs & Debuffs
 ## Category-deDE: Buffs & Debuffs
 ## Category-esES: Beneficios y Perjuicios
@@ -10,19 +14,14 @@
 ## Category-ruRU: Баффы и дебаффы
 ## Category-zhCN: 增益和减益
 ## Category-zhTW: 增益與減益
-## Title: Mirrors |cffc04000of|r Voodoo |cffc04000Options|r
-## Notes: |cffF0E68COptions for the |cffc04000Mirrors|r of |cffc04000Voodoo|r!
-## IconAtlas: Relic-Fire-TraitBG
-## DefaultState: enabled
-## LoadOnDemand: 1
+## Group: VDWS
 ## Dependencies: MOV
-## AllowAddOnTableAccess: 1
-## Version: 1.01
+## LoadOnDemand: 1
+## DefaultState: enabled
 ## Author: The_Indolent
 ## X-Website: https://panosanastasiou.rocks/
 
-MOV_Virtuals.xml
+MOV_Options_L.lua
 MOV_Options_0.xml
 MOV_Options_1.xml
 MOV_Options_2.xml
-
