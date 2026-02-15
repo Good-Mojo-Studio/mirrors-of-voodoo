@@ -1,14 +1,45 @@
-## Title: Mirrors of Voodoo
-## Category: Script - Addon
-## Game: World of Warcraft
+## Title: Mirrors of Voodoo (MOV)
+### Category: Script - Addon
+### Game: World of Warcraft
 
-Mirrors of Voodoo (MOV) is an add on, which enchant the default mirrors bars meaning the breath, fatigue, feign death bars etc.
+---
 
-You can open the options panel in two ways:
-1.	With the commands: /mov and /mirrorsofvoodoo.
-2.	Through the minimap buttons that Blizzard gave us. It’s a tiny number at the top-left or bottom-left of the minimap, click it and you will find it
+Enchant the default Breath, Fatigue, and other mirror bars with a touch of good mojo.
 
-Right now, MOV adds:
-- Timer on the mirror bar, which is movable.
-- The name of the bar became movable.
-- You can create, load, and delete a profile so you can copy/paste your settings between your characters!
+---
+
+### Addon support, information, ideas
+
+Here is some more information for the addon: [https://github.com/Good-Mojo-Studio/voodoo-casting-bar/wiki/Voodoo-Casting-Bar](https://github.com/Good-Mojo-Studio/voodoo-casting-bar/wiki/Voodoo-Casting-Bar)
+
+---
+
+### Part of the Good Mojo Studio ecosystem
+
+This addon works great on its own, and it also pairs nicely with the other Good Mojo Studio addons (VDWS bundle).
+
+---
+
+### How to open Options
+- Slash command: `/mov` or `/mirrorsofvoodoo`
+- Minimap “addon” button (the small Blizzard button near the minimap)
+
+---
+
+### Mirror Bars
+- Movable timer on the mirror bar
+- Movable bar name
+
+---
+
+### Extras
+- Profiles: save/load your setup between characters
+
+---
+
+### Known Issues
+- None.
+
+---
+
+**May the Good Mojo be with you!**
