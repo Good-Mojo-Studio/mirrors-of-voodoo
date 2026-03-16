@@ -2,18 +2,7 @@
 ## IconAtlas: Relic-Fire-TraitBG
 ## Title: Mirrors |cFFBCA220of|r Voodoo |cFFBCA220Options|r
 ## Notes: |cFFD1D9BFOptions for the |cFFBCA220Mirrors|r of |cFFBCA220Voodoo|r!|r
-## Version: 1.01.01
-## Category: Buffs & Debuffs
-## Category-deDE: Buffs & Debuffs
-## Category-esES: Beneficios y Perjuicios
-## Category-esMX: Beneficios y Perjuicios
-## Category-frFR: Améliorations et Affaiblissements
-## Category-itIT: Benefici e penalità
-## Category-koKR: 강화 및 약화 효과
-## Category-ptBR: Bônus e Penalidades
-## Category-ruRU: Баффы и дебаффы
-## Category-zhCN: 增益和减益
-## Category-zhTW: 增益與減益
+## Version: 1.01.02
 ## Group: VDWS
 ## Dependencies: MOV
 ## LoadOnDemand: 1
