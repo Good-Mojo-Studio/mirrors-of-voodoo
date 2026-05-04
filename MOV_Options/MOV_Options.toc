@@ -1,8 +1,8 @@
-## Interface: 120001
+## Interface: 120005
 ## IconAtlas: Relic-Fire-TraitBG
 ## Title: Mirrors |cFFBCA220of|r Voodoo |cFFBCA220Options|r
 ## Notes: |cFFD1D9BFOptions for the |cFFBCA220Mirrors|r of |cFFBCA220Voodoo|r!|r
-## Version: 1.01.02
+## Version: 1.01.03
 ## Group: VDWS
 ## Dependencies: MOV
 ## LoadOnDemand: 1
