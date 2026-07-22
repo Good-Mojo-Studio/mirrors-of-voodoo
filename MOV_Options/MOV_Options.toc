@@ -1,8 +1,8 @@
-## Interface: 120005
-## IconAtlas: Relic-Fire-TraitBG
-## Title: Mirrors |cFFBCA220of|r Voodoo |cFFBCA220Options|r
-## Notes: |cFFD1D9BFOptions for the |cFFBCA220Mirrors|r of |cFFBCA220Voodoo|r!|r
-## Version: 1.01.03
+## Interface: 120007
+## IconAtlas: TaxiNode_Continent_Alliance
+## Title: Mirrors |cFFBAD6EBof|r Voodoo |cFFBAD6EBOptions|r
+## Notes: |cFF86A7BFOptions for the |cFFBAD6EBMirrors|r of |cFFBAD6EBVoodoo|r!|r
+## Version: 1.02.00
 ## Group: VDWS
 ## Dependencies: MOV
 ## LoadOnDemand: 1
@@ -10,7 +10,6 @@
 ## Author: The_Indolent
 ## X-Website: https://panosanastasiou.rocks/
 
-MOV_Options_L.lua
 MOV_Options_0.xml
 MOV_Options_1.xml
 MOV_Options_2.xml

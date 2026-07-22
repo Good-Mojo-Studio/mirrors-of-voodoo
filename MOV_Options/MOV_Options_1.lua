@@ -1,134 +1,79 @@
--- some variables --
-local G = VDW.Local.Override
-local L = VDW.MOV.Local
-local C = VDW.GetAddonColors("MOV")
+-- some variables
+local Color = VDW.GetAddonColors("MOV")
 local prefixTip = VDW.Prefix("MOV")
 local maxW = 160
 local finalW = 0
 local counter = 0
-local textPosition = {G.OPTIONS_V_HIDE, G.OPTIONS_P_TOPLEFT, G.OPTIONS_P_LEFT, G.OPTIONS_P_BOTTOMLEFT, G.OPTIONS_P_TOP, G.OPTIONS_P_CENTER, G.OPTIONS_P_BOTTOM, G.OPTIONS_P_TOPRIGHT, G.OPTIONS_P_RIGHT, G.OPTIONS_P_BOTTOMRIGHT}
--- Taking care of the option panel --
-movOptions1:ClearAllPoints()
-movOptions1:SetPoint("TOPLEFT", movOptions00, "TOPLEFT", 0, 0)
--- Background of the option panel --
-movOptions1.BGtexture:SetTexture("Interface\\ACHIEVEMENTFRAME\\UI-Achievement-Parchment-Horizontal-Desaturated.blp", "CLAMP", "CLAMP", "NEAREST")
-movOptions1.BGtexture:SetVertexColor(C.High:GetRGB())
-movOptions1.BGtexture:SetDesaturation(0.3)
--- Title of the option panel --
-movOptions1.Title:SetTextColor(C.Main:GetRGB())
-movOptions1.Title:SetText(prefixTip.."|nVersion: "..C.High:WrapTextInColorCode(C_AddOns.GetAddOnMetadata("MOV", "Version")))
--- Top text of the option panel --
-movOptions1.TopTxt:SetTextColor(C.Main:GetRGB())
-movOptions1.TopTxt:SetText(L.P_MIRROR_BARS)
--- Bottom right text of the option panel --
-movOptions1.BottomRightTxt:SetTextColor(C.Main:GetRGB())
-movOptions1.BottomRightTxt:SetText(C_AddOns.GetAddOnMetadata("MOV", "X-Website"))
--- taking care of the boxes --
-movOptions1Box1.Title:SetText(L.B_NAMES)
-movOptions1Box2.Title:SetText(L.B_TIMERS)
-movOptions1Box2:SetPoint("TOPLEFT", movOptions1Box1, "BOTTOMLEFT", 0, 0)
+local textPosition = {
+	{value = "Hide", text = VDWtranslate.Global.HIDE},
+	{value = "TopLeft", text = VDWtranslate.Global.TOPLEFT},
+	{value = "Left", text = VDWtranslate.Global.LEFT},
+	{value = "BottomLeft", text = VDWtranslate.Global.BOTTOMLEFT},
+	{value = "Top", text = VDWtranslate.Global.TOP},
+	{value = "Center", text = VDWtranslate.Global.CENTER},
+	{value = "Bottom", text = VDWtranslate.Global.BOTTOM},
+	{value = "TopRight", text = VDWtranslate.Global.TOPRIGHT},
+	{value = "Right", text = VDWtranslate.Global.RIGHT},
+	{value = "BottomRight", text = VDWtranslate.Global.BOTTOMRIGHT},
+}
+local textPositionByValue = {}
+for _, option in ipairs(textPosition) do
+	textPositionByValue[option.value] = option.text
+end
+-- create panel
+VDW.CreateOptionsPanel(movOptions.Panel1, VDW.Background.MOV, Color.Main, Color.High, 0.8, "MOV")
+movOptions.Panel1.TopTxt:SetText("Mirror Bars")
+-- create box
+movOptions.Panel1.Box1.Title:SetText(VDWtranslate.Global.NAME)
+movOptions.Panel1.Box2:SetPoint("TOPLEFT", movOptions.Panel1.Box1, "BOTTOMLEFT", 0, 0)
+movOptions.Panel1.Box2.Title:SetText(VDWtranslate.Global.TIME)
 for i = 1, 2, 1 do
-	local tW = _G["movOptions1Box"..i].Title:GetStringWidth()+16
-	local W = _G["movOptions1Box"..i]:GetWidth()
-	if tW >= W then
-		_G["movOptions1Box"..i]:SetWidth(tW)
-	end
+	VDW.CreateOptionsBox(movOptions.Panel1, i, Color.Main, Color.High)
 end
--- Coloring the boxes --
+-- Box 1-2, PopOut 1, text position
 for i = 1, 2, 1 do
-	_G["movOptions1Box"..i].Title:SetTextColor(C.Main:GetRGB())
-	_G["movOptions1Box"..i].BorderTop:SetVertexColor(C.High:GetRGB())
-	_G["movOptions1Box"..i].BorderBottom:SetVertexColor(C.High:GetRGB())
-	_G["movOptions1Box"..i].BorderLeft:SetVertexColor(C.High:GetRGB())
-	_G["movOptions1Box"..i].BorderRight:SetVertexColor(C.High:GetRGB())
-end
--- Coloring the pop out buttons --
-local function ColoringPopOutButtons(k, var1)
-	_G["movOptions1Box"..k.."PopOut"..var1].Text:SetTextColor(C.Main:GetRGB())
-	_G["movOptions1Box"..k.."PopOut"..var1].Title:SetTextColor(C.High:GetRGB())
-	_G["movOptions1Box"..k.."PopOut"..var1].NormalTexture:SetVertexColor(C.High:GetRGB())
-	_G["movOptions1Box"..k.."PopOut"..var1].HighlightTexture:SetVertexColor(C.Main:GetRGB())
-	_G["movOptions1Box"..k.."PopOut"..var1].PushedTexture:SetVertexColor(C.High:GetRGB())
-end
--- Pop out 1 Buttons text position  --
-for k = 1, 2, 1 do
-	_G["movOptions1Box"..k.."PopOut1"].Title:SetText(L.W_POSITION)
-	ColoringPopOutButtons(k, 1)
-	for i, name in ipairs(textPosition) do
-		local btn = CreateFrame("Button", "movOptions1Box"..k.."PopOut1Choice"..i, nil, "vdwPopOutButton")
-		_G["movOptions1Box"..k.."PopOut1Choice"..i]:ClearAllPoints()
-		if i == 1 then
-			_G["movOptions1Box"..k.."PopOut1Choice"..i]:SetParent(_G["movOptions1Box"..k.."PopOut1"])
-			_G["movOptions1Box"..k.."PopOut1Choice"..i]:SetPoint("TOP", "movOptions1Box"..k.."PopOut1", "BOTTOM", 0, 4)
-			_G["movOptions1Box"..k.."PopOut1Choice"..i]:SetScript("OnShow", function(self)
-				self:GetParent():SetNormalAtlas("charactercreate-customize-dropdownbox-hover")
-				PlaySound(855, "Master")
-			end)
-			_G["movOptions1Box"..k.."PopOut1Choice"..i]:SetScript("OnHide", function(self)
-				self:GetParent():SetNormalAtlas("charactercreate-customize-dropdownbox-open")
-				PlaySound(855, "Master")
-			end)
-		else
-			_G["movOptions1Box"..k.."PopOut1Choice"..i]:SetParent(_G["movOptions1Box"..k.."PopOut1Choice1"])
-			_G["movOptions1Box"..k.."PopOut1Choice"..i]:SetPoint("TOP", _G["movOptions1Box"..k.."PopOut1Choice"..i-1], "BOTTOM", 0, 0)
-			_G["movOptions1Box"..k.."PopOut1Choice"..i]:Show()
-		end
-		_G["movOptions1Box"..k.."PopOut1Choice"..i].Text:SetText(name)
-		_G["movOptions1Box"..k.."PopOut1Choice"..i]:HookScript("OnClick", function(self, button, down)
+	VDW.CreateOptionsPopOut(movOptions.Panel1, i, 1, Color.Main, Color.High)
+	movOptions.Panel1["Box"..i].PopOut1:HookScript("OnEnter", function(self)
+		local parent = self:GetParent()
+		local word = parent.Title:GetText()
+		VDW.Tooltip_Show(self, prefixTip, string.format(VDWtranslate.Global.POSITION_TIP, word), Color.Main, "Left")
+	end)
+	movOptions.Panel1["Box"..i].PopOut1.Title:SetText(VDWtranslate.Global.POSITION)
+	for k, v in pairs(textPosition) do
+		counter = counter + 1
+		VDW.CreateOptionsPopOutButtons(movOptions.Panel1, i, 1, k, v, Color.Main)
+		movOptions.Panel1["Box"..i].PopOut1["Choice"..k]:HookScript("OnClick", function(self, button, down)
 			if button == "LeftButton" and down == false then
-				if k == 1 then
-					MOVsettings["NameText"]["Position"] = self.Text:GetText()
-				elseif k== 2 then
-					MOVsettings["TimeText"]["Position"] = self.Text:GetText()
+				if i == 1 then
+					MOVsettings.NameText.Position = v.value
+				else
+					MOVsettings.TimeText.Position = v.value
 				end
-				_G["movOptions1Box"..k.."PopOut1"].Text:SetText(self.Text:GetText())
-				_G["movOptions1Box"..k.."PopOut1Choice1"]:Hide()
+				movOptions.Panel1["Box"..i].PopOut1.Text:SetText(self.Text:GetText())
+				movOptions.Panel1["Box"..i].PopOut1.Choice1:Hide()
 			end
 		end)
-	local w = _G["movOptions1Box"..k.."PopOut1Choice"..i].Text:GetStringWidth()
+		local w = movOptions.Panel1["Box"..i].PopOut1["Choice"..k].Text:GetStringWidth()
 		if w > maxW then maxW = w end
 	end
 	finalW = math.ceil(maxW + 24)
-	for i = 1, counter, 1 do
-		_G["movOptions1Box"..k.."PopOut1Choice"..i]:SetWidth(finalW)
+	for c = 1, counter, 1 do
+		movOptions.Panel1["Box"..i].PopOut1["Choice"..c]:SetWidth(finalW)
 	end
 	counter = 0
 	maxW = 160
-	_G["movOptions1Box"..k.."PopOut1"]:HookScript("OnEnter", function(self)
-		local parent = self:GetParent()
-		local word = parent.Title:GetText()
-		VDW.Tooltip_Show(self, prefixTip, string.format(L.W_P_TIP, word), C.Main)
-	end)
-	_G["movOptions1Box"..k.."PopOut1"]:HookScript("OnLeave", function(self) VDW.Tooltip_Hide() end)
-	_G["movOptions1Box"..k.."PopOut1"]:HookScript("OnClick", function(self, button, down)
-		if button == "LeftButton" and down == false then
-			if not _G["movOptions1Box"..k.."PopOut1Choice1"]:IsShown() then
-				_G["movOptions1Box"..k.."PopOut1Choice1"]:Show()
-			else
-				_G["movOptions1Box"..k.."PopOut1Choice1"]:Hide()
-			end
-		end
-	end)
 end
--- Checking the Saved Variables --
+-- Check Saved Variables
 local function CheckSavedVariables()
-	movOptions1Box1PopOut1.Text:SetText(MOVsettings["NameText"]["Position"])
-	movOptions1Box2PopOut1.Text:SetText(MOVsettings["TimeText"]["Position"])
+	movOptions.Panel1.Box1.PopOut1.Text:SetText(textPositionByValue[MOVsettings.NameText.Position] or VDWtranslate.Global.HIDE)
+	movOptions.Panel1.Box2.PopOut1.Text:SetText(textPositionByValue[MOVsettings.TimeText.Position] or VDWtranslate.Global.HIDE)
 end
--- Show the option panel --
-movOptions1:HookScript("OnShow", function(self)
-	movOptions00Tab2.Text:SetTextColor(0.4, 0.4, 0.4, 1)
-	if movOptions2:IsShown() then movOptions2:Hide() end
-	movOptions00Tab1.Text:SetTextColor(C.High:GetRGB())
+-- show the option panel
+movOptions.Panel1:HookScript("OnShow", function(self)
+	movOptions.Tab2.Text:SetTextColor(0.4, 0.4, 0.4, 1)
+	if movOptions.Panel2:IsShown() then movOptions.Panel2:Hide() end
+	movOptions.Tab1.Text:SetTextColor(Color.High:GetRGB())
 	CheckSavedVariables()
 end)
--- Background of the tabs frame --
-local OptionsW = movOptions1:GetWidth()
-movOptions00:SetWidth(movOptions00Tab1:GetWidth() + OptionsW)
-movOptions00:SetHeight(movOptions1:GetHeight())
-movOptions00.BGtexture:ClearAllPoints()
-movOptions00.BGtexture:SetPoint("TOPRIGHT", movOptions00, "TOPRIGHT", 0, 0)
-movOptions00.BGtexture:SetPoint("BOTTOMLEFT", movOptions00, "BOTTOMLEFT", OptionsW, 0)
-movOptions00.BGtexture:SetTexture("Interface\\ACHIEVEMENTFRAME\\UI-Achievement-Parchment-Horizontal-Desaturated.blp", "CLAMP", "CLAMP", "NEAREST")
-movOptions00.BGtexture:SetDesaturation(0.3)
-movOptions00.BGtexture:SetGradient("VERTICAL", C.NoHigh, C.High)
+-- create background tab
+VDW.CreateBackgroundTab(movOptions, VDW.Background.MOV, 0.8, Color.NoHigh, Color.High)

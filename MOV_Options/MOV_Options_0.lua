@@ -1,59 +1,50 @@
--- some variables --
-local L = VDW.MOV.Local
-local C = VDW.GetAddonColors("MOV")
+-- some variables
+local Color = VDW.GetAddonColors("MOV")
 local prefixTip = VDW.Prefix("MOV")
 local maxW = 128
 local finalW = 0
--- Entering the tabs frame' Exit Button --
-movOptions00.ExitButton:HookScript("OnEnter", function(self)
-	VDW.Tooltip_Show(self, prefixTip, L.TIP_CLOSE_PANEL, C.Main)
+-- create panel
+movOptions.ExitButton:HookScript("OnEnter", function(self)
+	VDW.Tooltip_Show(self, prefixTip, VDWtranslate.Global.CLOSE_THIS_PANEL, Color.Main, "Left")
 end)
--- Move the tabs frame --
-movOptions00:RegisterForDrag("LeftButton")
-movOptions00:SetScript("OnDragStart", movOptions00.StartMoving)
-movOptions00:SetScript("OnDragStop", movOptions00.StopMovingOrSizing)
--- Taking care of the Tabs --
--- Naming the tab --
-movOptions00Tab1.Text:SetText(L.T_NAME_TIMERS)
-movOptions00Tab2.Text:SetText(L.P_TAB)
--- Position & center text color --
+VDW.MoveTheFrame(movOptions, "LeftButton")
+movOptions.Tab1.Text:SetText(VDWtranslate.Global.NAME.." - "..VDWtranslate.Global.TIME)
+movOptions.Tab2.Text:SetText(VDWtranslate.Global.P_TAB)
 for i = 1, 2, 1 do
-	local w = _G["movOptions00Tab"..i].Text:GetStringWidth()
+	local w = movOptions["Tab"..i].Text:GetStringWidth()
 	if w > maxW then maxW = w end
 end
 finalW = math.ceil(maxW + 16)
 for i = 1, 2, 1 do
-	_G["movOptions00Tab"..i]:SetWidth(finalW)
-end
-movOptions00Tab2:SetPoint("TOP", movOptions00Tab1, "BOTTOM", 0, 0)
--- Entering the tabs --
-movOptions00Tab1:HookScript("OnEnter", function(self)
-	local word = self.Text:GetText()
-	VDW.Tooltip_Show(self, prefixTip, string.format(L.T_TIP, word), C.Main)
-end)
-movOptions00Tab2:HookScript("OnEnter", function(self)
-	VDW.Tooltip_Show(self, prefixTip, L.P_TITLE, C.Main)
-end)
--- Leaving the tabs --
-for i = 1, 2, 1 do
-	_G["movOptions00Tab"..i]:HookScript("OnLeave", function(self)
+	movOptions["Tab"..i]:SetWidth(finalW)
+	movOptions["Tab"..i].NormalTexture:SetVertexColor(Color.High:GetRGB())
+	movOptions["Tab"..i]:HookScript("OnLeave", function(self)
 		VDW.Tooltip_Hide()
 	end)
-end
--- clickingthe tabs --
-for i = 1, 2, 1 do
-	_G["movOptions00Tab"..i]:HookScript("OnClick", function(self, button, down)
+	movOptions["Tab"..i]:HookScript("OnClick", function(self, button, down)
 		if button == "LeftButton" and down == false then
-			if not _G["movOptions"..i]:IsShown() then _G["movOptions"..i]:Show() end
+			if not movOptions["Panel"..i]:IsShown() then movOptions["Panel"..i]:Show() end
 		end
 	end)
+	if i == 1 then
+		movOptions["Tab"..i]:HookScript("OnEnter", function(self)
+			local word = self.Text:GetText()
+			VDW.Tooltip_Show(self, prefixTip, string.format(VDWtranslate.Global.OPTIONS_FOR, word), Color.Main, "Left")
+		end)
+	else
+		movOptions["Tab"..i]:SetPoint("TOP", movOptions["Tab"..i-1], "BOTTOM", 0, 0)
+		movOptions["Tab"..i]:HookScript("OnEnter", function(self)
+			VDW.Tooltip_Show(self, prefixTip, VDWtranslate.Global.P_TITLE, Color.Main, "Left")
+		end)
+	end
 end
--- show the tabs frame --
-movOptions00:SetScript("OnShow", function(self)
-	if not movOptions1:IsShown() then movOptions1:Show() end
+-- show the option panel
+movOptions:SetScript("OnShow", function(self)
+	if not movOptions.Panel1:IsShown() then movOptions.Panel1:Show() end
 end)
--- Hide the tabs frame --
-movOptions00:HookScript("OnHide", function(self)
-	if movOptions1:IsShown() then movOptions1:Hide() end
-	if movOptions2:IsShown() then movOptions2:Hide() end
+-- hide the option panel
+movOptions:HookScript("OnHide", function(self)
+	for i = 1, 2, 1 do
+		if movOptions["Panel"..i]:IsShown() then movOptions["Panel"..i]:Hide() end
+	end
 end)

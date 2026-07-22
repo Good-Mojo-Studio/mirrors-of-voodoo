@@ -1,8 +1,8 @@
-## Interface: 120005
-## IconAtlas: Relic-Fire-TraitBG
-## Title: Mirrors |cFFBCA220of|r Voodoo
-## Notes: |cFFD1D9BFGive a little |cFFBCA220mojo|r to the default |cFFBCA220mirrors|r bars|n(|cFFBCA220Breath|r, Exhaust, |cFFBCA220etc|r)|r
-## Version: 1.01.03
+## Interface: 120007
+## IconAtlas: TaxiNode_Continent_Alliance
+## Title: Mirrors |cFFBAD6EBof|r Voodoo
+## Notes: |cFF86A7BFGive a little |cFFBAD6EBmojo|r to the default |cFFBAD6EBmirrors|r bars|n(|cFFBAD6EBBreath|r, Exhaust, |cFFBAD6EBetc|r)|r
+## Version: 1.02.00
 ## Group: VDWS
 ## Dependencies: VDW
 ## DefaultState: enabled
