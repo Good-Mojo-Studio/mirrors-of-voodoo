@@ -1,13 +1,13 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Gethe/wow-ui-source/live/Interface/AddOns/Blizzard_SharedXML/UI.xsd">
 	<Frame parentKey="Panel2" inherits="vdwOptionsPanel" parent="movOptions">
 		<Frames>
-<!-- Options Box 1 saving profiles -->
+<!-- Options box 1 saving profiles -->
 			<Frame parentKey="Box1" inherits="vdwOptionsBox">
 				<Anchors>
 					<Anchor point="TOP" relativePoint="TOP" x ="0" y="-64"/>
 				</Anchors>
 				<Frames>
-<!--Edit Box 1 naming profile -->
+<!--Edit box 1 naming profile -->
 					<Frame parentKey="EditBox1" inherits="vdwEditBox">
 						<Anchors>
 							<Anchor point="TOP" relativeKey="$parent.Title" relativePoint="BOTTOM" x="0" y="-8"/>
@@ -15,13 +15,13 @@
 					</Frame>
 				</Frames>
 			</Frame>
-<!-- Options Box 2 loading profiles -->
+<!-- Options box 2 loading profiles -->
 			<Frame parentKey="Box2" inherits="vdwOptionsBox">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeKey="$parent.Box1" relativePoint="BOTTOMLEFT" x ="0" y="0"/>
 				</Anchors>
 				<Frames>
-<!-- Pop Out 1 loading choose -->
+<!-- PopOut 1 choose profile -->
 					<Button parentKey="PopOut1" inherits="vdwPopOut">
 						<Anchors>
 							<Anchor point="TOP" relativeKey="$parent.Title" relativePoint="BOTTOM" x="0" y="-8"/>
@@ -29,13 +29,13 @@
 					</Button>
 				</Frames>
 			</Frame>
-<!-- Options Box 3 deleting profiles -->
+<!-- Options box 3 deleting profiles -->
 			<Frame parentKey="Box3" inherits="vdwOptionsBox">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeKey="$parent.Box2" relativePoint="BOTTOMLEFT" x ="0" y="0"/>
 				</Anchors>
 				<Frames>
-<!-- Pop Out 1 deleting choose -->
+<!-- PopOut 1 choose profile -->
 					<Button parentKey="PopOut1" inherits="vdwPopOut">
 						<Anchors>
 							<Anchor point="TOP" relativeKey="$parent.Title" relativePoint="BOTTOM" x="0" y="-8"/>
@@ -43,7 +43,7 @@
 					</Button>
 				</Frames>
 			</Frame>
-<!-- Options Box 4 Note box -->
+<!-- Options box 4 notes -->
 			<Frame parentKey="Box4" inherits="vdwOptionsBox">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeKey="$parent.Box3" relativePoint="BOTTOMLEFT" x ="0" y="0"/>

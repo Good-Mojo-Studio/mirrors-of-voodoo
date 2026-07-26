@@ -2,7 +2,7 @@
 ## IconAtlas: TaxiNode_Continent_Alliance
 ## Title: Mirrors |cFFBAD6EBof|r Voodoo
 ## Notes: |cFF86A7BFGive a little |cFFBAD6EBmojo|r to the default |cFFBAD6EBmirrors|r bars|n(|cFFBAD6EBBreath|r, Exhaust, |cFFBAD6EBetc|r)|r
-## Version: 1.02.00
+## Version: 1.02.01
 ## Group: VDWS
 ## Dependencies: VDW
 ## DefaultState: enabled

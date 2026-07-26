@@ -1,4 +1,4 @@
--- some variables
+-- Some variables
 local Color = VDW.GetAddonColors("MOV")
 local prefixTip = VDW.Prefix("MOV")
 local maxW = 160
@@ -20,10 +20,10 @@ local textPositionByValue = {}
 for _, option in ipairs(textPosition) do
 	textPositionByValue[option.value] = option.text
 end
--- create panel
+-- Create panel
 VDW.CreateOptionsPanel(movOptions.Panel1, VDW.Background.MOV, Color.Main, Color.High, 0.8, "MOV")
 movOptions.Panel1.TopTxt:SetText("Mirror Bars")
--- create box
+-- Create boxes
 movOptions.Panel1.Box1.Title:SetText(VDWtranslate.Global.NAME)
 movOptions.Panel1.Box2:SetPoint("TOPLEFT", movOptions.Panel1.Box1, "BOTTOMLEFT", 0, 0)
 movOptions.Panel1.Box2.Title:SetText(VDWtranslate.Global.TIME)
@@ -63,17 +63,17 @@ for i = 1, 2, 1 do
 	counter = 0
 	maxW = 160
 end
--- Check Saved Variables
+-- Check saved variables
 local function CheckSavedVariables()
 	movOptions.Panel1.Box1.PopOut1.Text:SetText(textPositionByValue[MOVsettings.NameText.Position] or VDWtranslate.Global.HIDE)
 	movOptions.Panel1.Box2.PopOut1.Text:SetText(textPositionByValue[MOVsettings.TimeText.Position] or VDWtranslate.Global.HIDE)
 end
--- show the option panel
+-- Show the option panel
 movOptions.Panel1:HookScript("OnShow", function(self)
 	movOptions.Tab2.Text:SetTextColor(0.4, 0.4, 0.4, 1)
 	if movOptions.Panel2:IsShown() then movOptions.Panel2:Hide() end
 	movOptions.Tab1.Text:SetTextColor(Color.High:GetRGB())
 	CheckSavedVariables()
 end)
--- create background tab
+-- Create background tab
 VDW.CreateBackgroundTab(movOptions, VDW.Background.MOV, 0.8, Color.NoHigh, Color.High)

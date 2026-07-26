@@ -1,13 +1,13 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Gethe/wow-ui-source/live/Interface/AddOns/Blizzard_SharedXML/UI.xsd">
 	<Frame parentKey="Panel1" inherits="vdwOptionsPanel" parent="movOptions">
 		<Frames>
-<!-- Options Box 1 Names' Position -->
+<!-- Options box 1 names position -->
 			<Frame parentKey="Box1" inherits="vdwOptionsBox">
 				<Anchors>
 					<Anchor point="TOP" relativePoint="TOP" x ="0" y="-64"/>
 				</Anchors>
 				<Frames>
-<!-- Pop Out 1 Position -->
+<!-- PopOut 1 position -->
 					<Button parentKey="PopOut1" inherits="vdwPopOut">
 						<Anchors>
 							<Anchor point="TOP" relativePoint="TOP" x="0" y="-40"/>
@@ -15,10 +15,10 @@
 					</Button>
 				</Frames>
 			</Frame>
-<!-- Options Box 2 Timers' Position -->
+<!-- Options box 2 timers position -->
 			<Frame parentKey="Box2" inherits="vdwOptionsBox">
 				<Frames>
-<!-- Pop Out 1 Position -->
+<!-- PopOut 1 position -->
 					<Button parentKey="PopOut1" inherits="vdwPopOut">
 						<Anchors>
 							<Anchor point="TOP" relativePoint="TOP" x="0" y="-40"/>

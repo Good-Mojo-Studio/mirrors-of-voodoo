@@ -1,4 +1,4 @@
--- some variables
+-- Some variables
 local Color = VDW.GetAddonColors("MOV")
 local prefixTip = VDW.Prefix("MOV")
 local name = ""
@@ -7,11 +7,11 @@ local Keys = 0
 local maxW = 160
 local finalW = 0
 local counter = 0
--- finding keys
+-- Finding keys
 for k, v in pairs(MOVprofiles) do
 	Keys = Keys + 1
 end
--- create panel
+-- Create panel
 VDW.CreateOptionsPanel(movOptions.Panel2, VDW.Background.MOV, Color.Main, Color.High, 0.8, "MOV")
 movOptions.Panel2.TopTxt:SetText(VDWtranslate.Global.P_TITLE)
 movOptions.Panel2.Box1.Title:SetText(VDWtranslate.Global.P_SUB_CREATE)
@@ -26,7 +26,7 @@ VDW.CreateEditBox(movOptions.Panel2, 1, 1, Color.High)
 movOptions.Panel2.Box1.EditBox1.WritingLine:HookScript("OnEnter", function(self)
 	VDW.Tooltip_Show(self, prefixTip, VDWtranslate.Global.P_TIP_CREATE, Color.Main, "Left")
 end)
--- pressing enter
+-- Pressing enter
 movOptions.Panel2.Box1.EditBox1.WritingLine:SetScript("OnEnterPressed", function(self)
 	if self:HasText() then
 		EditBox_HighlightText(self)
@@ -102,9 +102,9 @@ for i = 2, 3, 1 do
 		counter = 0
 	end
 end
--- Box 4, Notes
+-- Box 4, notes
 VDW.CreateImportantNotesProfiles("MOV", movOptions.Panel2, 4, Color.Main, Color.High)
--- show the panel
+-- Show the panel
 movOptions.Panel2:HookScript("OnShow", function(self)
 	movOptions.Tab1.Text:SetTextColor(0.4, 0.4, 0.4, 1)
 	if movOptions.Panel1:IsShown() then movOptions.Panel1:Hide() end

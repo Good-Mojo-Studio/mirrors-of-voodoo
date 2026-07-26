@@ -2,7 +2,7 @@
 ## IconAtlas: TaxiNode_Continent_Alliance
 ## Title: Mirrors |cFFBAD6EBof|r Voodoo |cFFBAD6EBOptions|r
 ## Notes: |cFF86A7BFOptions for the |cFFBAD6EBMirrors|r of |cFFBAD6EBVoodoo|r!|r
-## Version: 1.02.00
+## Version: 1.02.01
 ## Group: VDWS
 ## Dependencies: MOV
 ## LoadOnDemand: 1

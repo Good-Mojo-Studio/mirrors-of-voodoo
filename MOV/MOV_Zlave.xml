@@ -2,7 +2,7 @@
 	<Frame name="movZlave" parent="UIParent" frameStrata="BACKGROUND" frameLevel="0" hidden="true">
 		<Scripts>
 			<OnLoad>
-				self:RegisterEvent("PLAYER_LOGIN")
+				self:RegisterEvent("ADDON_LOADED")
 			</OnLoad>
 		</Scripts>
 	</Frame>

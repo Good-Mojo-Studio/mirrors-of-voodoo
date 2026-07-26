@@ -1,7 +1,7 @@
--- some variables
+-- Some variables
 MOV = MOV or {}
 local Color = VDW.GetAddonColors("MOV")
--- loading first time the variables
+-- First time variables
 local function FirstTimeSavedVariables()
 	if MOVprofiles == nil then MOVprofiles = {} end
 	if MOVsettings == nil then MOVsettings = {} end
@@ -9,35 +9,39 @@ local function FirstTimeSavedVariables()
 	if MOVsettings.TimeText == nil then MOVsettings.TimeText = {Position = "BottomRight"} end
 	if MOVspecialSettings then MOVspecialSettings = nil end
 end
--- Time Text for MirrorTimerContainer.mirrorTimers[1]
+-- Time for MirrorTimerContainer.mirrorTimers[1]
 local MOVtimeText1 = MirrorTimerContainer.mirrorTimers[1]:CreateFontString(nil, "OVERLAY", nil)
 MOVtimeText1:SetFontObject("GameFontHighlightSmall")
--- Name Text for MirrorTimerContainer.mirrorTimers[1]
+-- Name for MirrorTimerContainer.mirrorTimers[1]
 local MOVnameText1 = MirrorTimerContainer.mirrorTimers[1]:CreateFontString(nil, "OVERLAY", nil)
 MOVnameText1:SetFontObject("GameFontHighlightSmall")
--- Time Text for MirrorTimerContainer.mirrorTimers[2]
+-- Time for MirrorTimerContainer.mirrorTimers[2]
 local MOVtimeText2 = MirrorTimerContainer.mirrorTimers[2]:CreateFontString(nil, "OVERLAY", nil)
 MOVtimeText2:SetFontObject("GameFontHighlightSmall")
--- Name Text for MirrorTimerContainer.mirrorTimers[2]
+-- Name for MirrorTimerContainer.mirrorTimers[2]
 local MOVnameText2 = MirrorTimerContainer.mirrorTimers[2]:CreateFontString(nil, "OVERLAY", nil)
 MOVnameText2:SetFontObject("GameFontHighlightSmall")
--- Time Text for MirrorTimerContainer.mirrorTimers[3]
+-- Time for MirrorTimerContainer.mirrorTimers[3]
 local MOVtimeText3 = MirrorTimerContainer.mirrorTimers[3]:CreateFontString(nil, "OVERLAY", nil)
 MOVtimeText3:SetFontObject("GameFontHighlightSmall")
--- Name Text for MirrorTimerContainer.mirrorTimers[3]
+-- Name for MirrorTimerContainer.mirrorTimers[3]
 local MOVnameText3 = MirrorTimerContainer.mirrorTimers[3]:CreateFontString(nil, "OVERLAY", nil)
 MOVnameText3:SetFontObject("GameFontHighlightSmall")
--- calculate time
+-- Calculate time
 local function CalculateTime(var1, txt)
 	local seconds = mod (var1, 60)
 	local minutes = mod (floor (floor(var1) / 60), 60)
 	if minutes == 0 then
-		txt:SetFormattedText("%.2f", seconds)
+		txt:SetFormattedText("%.2f Sec", seconds)
 	else
-		txt:SetFormattedText(minutes.. ":".. "%.0f", seconds)
+		if seconds >= 10 then
+			txt:SetFormattedText(minutes..":".."%.0f", seconds)
+		else
+			txt:SetFormattedText(minutes..":0".."%.0f", seconds)
+		end
 	end
 end
--- position time
+-- Positioning time
 local function Positioning(self , var1, var2)
 	if MOVsettings[var1].Position == "TopLeft" then
 		var2:ClearAllPoints()
@@ -79,7 +83,7 @@ local function Positioning(self , var1, var2)
 		var2:Hide()
 	end
 end
--- hooking time part 1
+-- Hooking time part 1
 MirrorTimerContainer.mirrorTimers[1]:HookScript("OnShow", function(self)
 	self.Text:SetAlpha(0)
 	Positioning(self , "NameText", MOVnameText1)
@@ -98,7 +102,7 @@ MirrorTimerContainer.mirrorTimers[3]:HookScript("OnShow", function(self)
 	MOVnameText3:SetText(self.Text:GetText())
 	Positioning(self , "TimeText", MOVtimeText3)
 end)
--- hooking time part 2
+-- Hooking time part 2
 MirrorTimerContainer.mirrorTimers[1]["StatusBar"]:HookScript("OnUpdate", function(self)
 	CalculateTime(self:GetValue(), MOVtimeText1)
 end)
@@ -108,9 +112,9 @@ end)
 MirrorTimerContainer.mirrorTimers[3]["StatusBar"]:HookScript("OnUpdate", function(self)
 	CalculateTime(self:GetValue(), MOVtimeText3)
 end)
--- events time
+-- Events time
 local function EventsTime(self, event, arg1, arg2, arg3)
-	if event == "PLAYER_LOGIN" then
+	if event == "ADDON_LOADED" and arg1 == "MOV" then
 		VDW.CreateSlashMinmap("MOV", "MOV_Options", "Mirrors of Voodoo Options", "movOptions", "mov", "mirrorsofvoodoo", Color.Main, Color.High)
 		FirstTimeSavedVariables()
 	end
